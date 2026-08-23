@@ -70,31 +70,38 @@ The Central Library wants to manage book lending and cultural events.
 - Overdue fines apply for late returns.
 
 ### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_library.png)
+
+<img width="772" height="942" alt="image" src="https://github.com/user-attachments/assets/75db56e4-6613-49c4-822c-4a8f2dc3480d" />
 
 ### Entities and Attributes
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+| Entity       | Attributes (PK, FK)                                | Notes                            |
+| ------------ | -------------------------------------------------- | -------------------------------- |
+| Member       | **Member_ID (PK)**, Member_Name, Phone_no          | Phone_no is multivalued          |
+| Loan         | **Loan_ID (PK)**, Loan_Date, Return_Date           | Loan transaction details         |
+| Book         | **Book_ID (PK)**, Book_Title, Author               | Book details                     |
+| Event        | **Event_ID (PK)**, Event_Name, Duration            | Library event details            |
+| Room         | **Room_no (PK)**, Room_Name, Capacity              | Room details                     |
+| Speaker      | **Speaker_ID (PK)**, Speaker_Name, Speech_Duration | Speaker details                  |
+| Overdue_Fine | —                                                  | Fine associated with late return |
+
 
 ### Relationships and Constraints
 
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+| Relationship                    | Cardinality | Participation                      | Notes                              |
+| ------------------------------- | ----------- | ---------------------------------- | ---------------------------------- |
+| Take (Member–Loan)              | 1 : N       | Member – Partial, Loan – Total     | A member can take multiple loans   |
+| Borrow (Loan–Book)              | N : 1       | Loan – Total, Book – Partial       | A loan is associated with a book   |
+| Late_Return (Book–Overdue_Fine) | 1 : 1       | Partial                            | Fine is applicable for late return |
+| Register (Member–Event)         | N : M       | Partial                            | Members can register for events    |
+| Have (Event–Speaker)            | N : M       | Event – Partial, Speaker – Partial | Events can have multiple speakers  |
+| Booked (Event–Room)             | N : 1       | Event – Total, Room – Partial      | An event is booked in a room       |
+
 
 ### Assumptions
-- 
-- 
-- 
+- A member can borrow multiple books through separate loan transactions.
+- A member can register for multiple library events.
+- An event may have one or more speakers and is conducted in a booked room.
 
 ---
 
@@ -112,31 +119,39 @@ A popular restaurant wants to manage reservations, orders, and billing.
 - Waiters assigned to serve reservations.
 
 ### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_restaurant.png)
+
+<img width="842" height="852" alt="image" src="https://github.com/user-attachments/assets/a567220f-ece3-4c67-821c-30504a63caa6" />
+
 
 ### Entities and Attributes
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+| Entity      | Attributes (PK, FK)                                    | Notes                               |
+| ----------- | ------------------------------------------------------ | ----------------------------------- |
+| Customer    | **Customer_ID (PK)**, Customer_Name, Phone_no          | Phone_no is multivalued             |
+| Reservation | Date, Time, No_of_Guests                               | Reservation details                 |
+| Food_Order  | **Order_ID (PK)**, **Reservation_ID (FK)**, Order_Time | Food order placed for a reservation |
+| Table       | **Table_ID (PK)**, Table_Name, Capacity                | Restaurant table details            |
+| Bills       | Payment_Method, Service_Charge, Food_Charge            | Bill generated for food order       |
+| Waiters     | **Waiter_ID (PK)**, Name, Phone_no                     | Phone_no is multivalued             |
+| Dishes      | Starter, Main_Dish, Dessert                            | Dishes available in restaurant      |
+
 
 ### Relationships and Constraints
 
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+| Relationship                   | Cardinality | Participation                             | Notes                                       |
+| ------------------------------ | ----------- | ----------------------------------------- | ------------------------------------------- |
+| Book (Customer–Reservation)    | 1 : N       | Customer – Partial, Reservation – Total   | One customer can make multiple reservations |
+| Place (Reservation–Food_Order) | 1 : N       | Reservation – Partial, Food_Order – Total | A reservation can have multiple food orders |
+| Assign (Reservation–Table)     | N : 1       | Reservation – Total, Table – Partial      | A reservation is assigned to a table        |
+| Generate (Food_Order–Bills)    | 1 : 1       | Total                                     | Each food order generates a bill            |
+| Serve (Food_Order–Waiters)     | N : 1       | Food_Order – Total, Waiter – Partial      | A waiter serves food orders                 |
+| Per_Order (Food_Order–Dishes)  | N : M       | Partial                                   | An order can contain multiple dishes        |
+
 
 ### Assumptions
-- 
-- 
-- 
+- A customer can make one or more reservations.
+- Each reservation is assigned to a table and can have food orders.
+- Each food order generates a bill and contains one or more dishes.
 
 ---
 
