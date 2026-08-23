@@ -1,5 +1,6 @@
 # ER Diagram Workshop – Submission Template
-
+# NAME : INDHUJA.K
+# Register no : 212225040133
 ## Objective
 To understand and apply ER modeling concepts by creating ER diagrams for real-world applications.
 
@@ -22,31 +23,36 @@ FlexiFit Gym wants a database to manage its members, trainers, and fitness progr
 - Payments tracked for memberships and sessions.
 
 ### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_fitness.png)
+
+<img width="822" height="922" alt="image" src="https://github.com/user-attachments/assets/17350024-2579-4a34-a45b-a876fe14f6de" />
 
 ### Entities and Attributes
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+| Entity     | Attributes (PK, FK)                       | Notes                      |
+| ---------- | ----------------------------------------- | -------------------------- |
+| Members    | Name, Membership_Type, Start_Date         | Member details             |
+| Programs   | Yoga, Zumba, Weight_Training              | Available fitness programs |
+| Session    | Session_Date, Session_Time, Duration      | Session details            |
+| Trainers   | **Trainer_ID (PK)**, Name, Phone_no       | Phone_no is multivalued    |
+| Payment    | **Payment_ID (PK)**, Payment_Type, Amount | Payment details            |
+| Attendance | —                                         | Records attendance         |
+
 
 ### Relationships and Constraints
 
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+| Relationship                | Cardinality | Participation                      | Notes                                      |
+| --------------------------- | ----------- | ---------------------------------- | ------------------------------------------ |
+| Register (Members–Programs) | N : M       | Partial                            | Members can register for multiple programs |
+| Assign (Programs–Trainers)  | N : M       | Partial                            | Trainers can be assigned to programs       |
+| Book (Session–Trainers)     | N : 1       | Session – Total, Trainer – Partial | A session is conducted by a trainer        |
+| Fees (Session–Payment)      | 1 : 1       | Total                              | Payment is associated with a session       |
+| Record (Session–Attendance) | 1 : 1       | Total                              | Attendance is recorded for a session       |
 
 ### Assumptions
-- 
-- 
-- 
+- A member can register for multiple fitness programs.
+- A program can have multiple trainers.
+- Each session has a scheduled date, time and duration.
+- Payment is recorded for the session.
 
 ---
 
