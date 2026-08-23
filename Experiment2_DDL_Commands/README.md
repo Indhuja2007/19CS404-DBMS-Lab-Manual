@@ -1,5 +1,6 @@
 # Experiment 2: DDL Commands
-
+# NAME : INDHUJA.K
+# Register no : 212225040133
 ## AIM
 To study and implement DDL commands and different types of constraints.
 
@@ -104,124 +105,218 @@ CREATE TABLE Table_Name (
 ```
 
 **Question 1**
---
--- Paste Question 1 here
+Create a new table named item with the following specifications and constraints:
+item_id as TEXT and as primary key.
+item_desc as TEXT.
+rate as INTEGER.
+icom_id as TEXT with a length of 4.
+icom_id is a foreign key referencing com_id in the company table.
+The foreign key should cascade updates and deletes.
+item_desc and rate should not accept NULL.
 
 ```sql
--- Paste your SQL code below for Question 1
+CREATE TABLE item (
+item_id TEXT PRIMARY KEY,
+item_desc TEXT NOT NULL,
+rate INTEGER NOT NULL,
+icom_id TEXT CHECK (Length(4)),
+FOREIGN KEY (icom_id)REFERENCES company(com_id)
+     ON UPDATE CASCADE
+     ON DELETE CASCADE
+
+);
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1251" height="711" alt="image" src="https://github.com/user-attachments/assets/fd968e8c-21b2-42e1-b8e6-fb4e7dae7020" />
 
 **Question 2**
 ---
--- Paste Question 2 here
+Write an SQL command can to add a column named email of type TEXT to the customers table
 
 ```sql
--- Paste your SQL code below for Question 2
+alter table Customers
+add email TEXT;
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1266" height="674" alt="image" src="https://github.com/user-attachments/assets/411b04c1-8f32-4e28-a430-c0726f6bc1f2" />
 
 **Question 3**
 ---
--- Paste Question 3 here
-
+Create a table named Products with the following constraints:
+ProductID as INTEGER should be the primary key.
+ProductName as TEXT should be unique and not NULL.
+Price as REAL should be greater than 0.
+StockQuantity as INTEGER should be non-negative.
 ```sql
--- Paste your SQL code below for Question 3
+CREATE TABLE Products(
+ProductID INTEGER  primary key,
+ProductName TEXT UNIQUE not NULL,
+Price  REAL CHECK(Price>0),
+StockQuantity  INTEGER CHECK(StockQuantity>0));
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1259" height="698" alt="image" src="https://github.com/user-attachments/assets/49ebdfdf-468a-45cd-85e5-8654d7fa6b62" />
 
 **Question 4**
 ---
--- Paste Question 4 here
+Insert all employees from Former_employees into Employee
+
+Table attributes are EmployeeID, Name, Department, Salary
+
+For example:
 
 ```sql
--- Paste your SQL code below for Question 4
+INSERT INTO Employee (EmployeeID, Name, Department, Salary)
+SELECT EmployeeID, Name, Department, Salary
+FROM Former_employees;
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1250" height="657" alt="image" src="https://github.com/user-attachments/assets/a7b6f3d9-537e-4f87-b6df-3fbdd9565406" />
 
 **Question 5**
 ---
--- Paste Question 5 here
+Write a SQL Query  to Rename attribute "name" to "first_name"  and add mobilenumber as number ,DOB as Date,State as varchar(30) in the table Companies. 
 
 ```sql
--- Paste your SQL code below for Question 5
+ALTER TABLE Companies
+RENAME COLUMN name TO first_name;
+
+ALTER TABLE Companies
+ADD COLUMN mobilenumb number;
+
+ALTER TABLE Companies
+ADD COLUMN DOB Date;
+
+ALTER TABLE Companies
+ADD COLUMN State varchar(30);
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="1245" height="779" alt="image" src="https://github.com/user-attachments/assets/3efce06e-904f-4339-a984-5349b3c9e11a" />
 
 **Question 6**
 ---
--- Paste Question 6 here
+In the Employee table, insert a record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
+
+EmployeeID  Name          Position    Department  Salary
+----------  ------------  ----------  ----------  ----------
+5           George Clark  Consultant
+7           Noah Davis    Manager     HR          60000
+8           Ava Miller    Consultant  IT
+ 
 
 ```sql
--- Paste your SQL code below for Question 6
+INSERT INTO Employee (EmployeeID, Name, Position)
+VALUES (5, 'George Clark', 'Consultant');
+INSERT INTO Employee (EmployeeID, Name, Position, Department, Salary)
+VALUES (7, 'Noah Davis', 'Manager', 'HR', 60000);
+INSERT INTO Employee (EmployeeID, Name, Position, Department)
+VALUES (8, 'Ava Miller', 'Consultant', 'IT');
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="1256" height="662" alt="image" src="https://github.com/user-attachments/assets/c4b311b5-06f5-4931-8a40-f888d90d2bc9" />
 
 **Question 7**
 ---
--- Paste Question 7 here
+Create a table named Shipments with the following constraints:
+ShipmentID as INTEGER should be the primary key.
+ShipmentDate as DATE.
+SupplierID as INTEGER should be a foreign key referencing Suppliers(SupplierID).
+OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
 
 ```sql
--- Paste your SQL code below for Question 7
+CREATE TABLE Shipments(
+ShipmentID INTEGER PRIMARY KEY,
+ShipmentDate DATE,
+SupplierID INTEGER,
+OrderID INTEGER,
+FOREIGN KEY(SupplierID)REFERENCES Suppliers(SupplierID)
+FOREIGN KEY(OrderID)REFERENCES Orders(OrderID)
+);
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="1253" height="634" alt="image" src="https://github.com/user-attachments/assets/ab98f73a-231a-4e9f-bf14-3e7e93890337" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+Create a table named Employees with the following columns:
+
+EmployeeID as INTEGER
+FirstName as TEXT
+LastName as TEXT
+HireDate as DATE
 
 ```sql
--- Paste your SQL code below for Question 8
+CREATE TABLE Employees(
+EmployeeID INTEGER,
+FirstName TEXT,
+LastName TEXT,
+HireDate DATE
+);
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1257" height="693" alt="image" src="https://github.com/user-attachments/assets/780c255b-8331-46d6-9d79-c21271eba38e" />
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+Create a table named Attendance with the following constraints:
+AttendanceID as INTEGER should be the primary key.
+EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
+AttendanceDate as DATE.
+Status as TEXT should be one of 'Present', 'Absent', 'Leave'.
 
 ```sql
--- Paste your SQL code below for Question 9
+CREATE TABLE Attendance(
+AttendanceID INTEGER PRIMARY KEY,
+EmployeeID INTEGER,
+AttendanceDate DATE,
+Status TEXT CHECK(Status='Present'OR Status='Absent'OR Status='Leave'),
+FOREIGN KEY(EmployeeID) REFERENCES Employees(EmployeeID)
+);
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1262" height="692" alt="image" src="https://github.com/user-attachments/assets/6ba32a5e-ade7-4967-b2d7-6b5c053e6c71" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+Insert the below data into the Customers table, allowing the City and ZipCode columns to take their default values.
+
+CustomerID  Name          Address
+----------  ------------  ----------
+304         Peter Parker  Spider St      
+
+Note: The City and ZipCode columns will use their default values.
+ 
 
 ```sql
--- Paste your SQL code below for Question 10
+INSERT INTO Customers (CustomerID, Name, Address)
+VALUES (304, 'Peter Parker', 'Spider St');
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="1258" height="699" alt="image" src="https://github.com/user-attachments/assets/6167394c-4088-42ef-bec6-4b1f7d7ebf93" />
+
 
 
 ## RESULT
